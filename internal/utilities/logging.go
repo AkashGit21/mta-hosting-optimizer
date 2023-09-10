@@ -55,7 +55,7 @@ func printLog(logLevel string, args ...interface{}) {
 	}
 	logsPath := filepath.Join(dir, "storage", "logs")
 	os.MkdirAll(logsPath, os.ModePerm)
-	path := "storage/logs/dropbox-"
+	path := "storage/logs/optimizer-"
 	fileName := path + currentTime.Format("2006-01-02") + ".log"
 
 	logFile, err := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, os.ModePerm)

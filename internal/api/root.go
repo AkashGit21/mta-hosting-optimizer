@@ -23,7 +23,7 @@ func PanicRecoveryMiddleware(next http.Handler) http.Handler {
 			if r := recover(); r != nil {
 				// Handle the panic
 				utilities.InfoLog("Panic recovered: ", r)
-				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+				http.Error(w, "something went wrong", http.StatusInternalServerError)
 			}
 		}()
 		next.ServeHTTP(w, r)

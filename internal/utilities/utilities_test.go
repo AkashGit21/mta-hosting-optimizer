@@ -72,16 +72,24 @@ func TestGetEnvValue(t *testing.T) {
 
 func TestWarnLog(t *testing.T) {
 	WarnLog("this", "is a test logging", 1, "warn")
+	// Clean up the storage directory(for log purposes) used in the integration test
+	os.RemoveAll("storage")
 }
 
 func TestErrorLog(t *testing.T) {
 	ErrorLog("this", "is a test logging", 1, "error")
+	// Clean up the storage directory(for log purposes) used in the integration test
+	os.RemoveAll("storage")
 }
 
 func TestDebugLog(t *testing.T) {
 	DebugLog("this", "is a test logging", 1, "debug")
+	// Clean up the storage directory(for log purposes) used in the integration test
+	os.RemoveAll("storage")
 }
 
 func TestInfoLog(t *testing.T) {
 	InfoLog("this", "is a test logging", 1, "info")
+	// Clean up the storage directory(for log purposes) used in the integration test
+	os.RemoveAll("storage")
 }

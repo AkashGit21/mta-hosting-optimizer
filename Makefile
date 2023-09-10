@@ -10,7 +10,7 @@ EXEC_ROOT=./cmd/mta-hosting-optimizer
 
 .PHONY: build
 build:
-	$(GOBUILD) -tags "$(TAGS)" -o $(BINARY_NAME) -v $(EXEC_ROOT)
+	$(GOBUILD) -o $(BINARY_NAME) -v $(EXEC_ROOT)
 
 .PHONY: help
 help:

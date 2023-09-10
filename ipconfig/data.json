@@ -1,0 +1,32 @@
+[
+    {
+        "ip": "127.0.0.1",
+        "hostname": "mta-prod-1",
+        "active": true
+    },
+    {
+        "ip": "127.0.0.2",
+        "hostname": "mta-prod-1",
+        "active": false
+    },
+    {
+        "ip": "127.0.0.3",
+        "hostname": "mta-prod-2",
+        "active": true
+    },
+    {
+        "ip": "127.0.0.4",
+        "hostname": "mta-prod-2",
+        "active": true
+    },
+    {
+        "ip": "127.0.0.5",
+        "hostname": "mta-prod-2",
+        "active": false
+    },
+    {
+        "ip": "127.0.0.6",
+        "hostname": "mta-prod-3",
+        "active": false
+    }    
+]

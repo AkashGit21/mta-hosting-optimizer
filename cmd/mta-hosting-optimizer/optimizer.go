@@ -9,7 +9,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "optimizer",
-	Short: "Root command of the mini dropbox project",
+	Short: "Root command of the mta-hosting-optimizer project",
 }
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		utilities.ErrorLog("could not execute min-dropbox", err)
+		utilities.ErrorLog("could not execute mta-hosting-optimizer", err)
 		os.Exit(1)
 	}
 }
