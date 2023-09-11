@@ -49,9 +49,7 @@ func (ah *apiHandler) getInefficientHosts(w http.ResponseWriter, r *http.Request
 		copy(ah.IPConfigs, ipConfigs)
 	}
 
-	// retrieve the list of inefficient hostnames
-	hostsFreq := make(map[string]int)
-	hostnames, envValue := make([]string, 0), utilities.GetEnvValue("X", "1")
+	envValue := utilities.GetEnvValue("X", "1")
 	utilities.InfoLog("Value of X is:", envValue)
 
 	X, err := strconv.Atoi(envValue)
@@ -61,8 +59,22 @@ func (ah *apiHandler) getInefficientHosts(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	bytes, err := filterInefficientHostnames(ah.IPConfigs, X)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write(getFailureMessage(errors.New("error while marshalling hostnames")))
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(bytes)
+}
+
+// filters out the hostname of inefficient servers
+func filterInefficientHostnames(ipconfigs []service.IpConfig, X int) ([]byte, error) {
+	hostsFreq, hostnames := make(map[string]int), make([]string, 0)
+
 	// Maintain a frequency count for each hostname using hostsFreq map
-	for _, ipConfig := range ah.IPConfigs {
+	for _, ipConfig := range ipconfigs {
 		if ipConfig.Active {
 			hostsFreq[ipConfig.Hostname]++
 		} else if _, ok := hostsFreq[ipConfig.Hostname]; !ok {
@@ -81,14 +93,7 @@ func (ah *apiHandler) getInefficientHosts(w http.ResponseWriter, r *http.Request
 		"hostnames": hostnames,
 	}
 
-	jsonBytes, err := json.Marshal(res)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write(getFailureMessage(errors.New("error while marshalling hostnames")))
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-	w.Write(jsonBytes)
+	return json.Marshal(res)
 }
 
 func getFailureMessage(err error) []byte {
