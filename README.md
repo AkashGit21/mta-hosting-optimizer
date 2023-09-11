@@ -24,7 +24,7 @@ addresses exists.
     ```sh
         go mod download
     ```
-1. Configure the sample data in similar format in the `ipconfig/data.json` file. 
+1. Configure the sample data in similar format in the `data.json` file present within `ipconfig` directory. 
 1. Run the application by typing the following from root directory:
     ```sh
         make run

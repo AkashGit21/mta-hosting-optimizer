@@ -11,7 +11,7 @@ import (
 	"github.com/AkashGit21/mta-hosting-optimizer/internal/service"
 )
 
-func TestIntegrationAPIHandler(t *testing.T) {
+func TestIntegrationAPIHandler_success(t *testing.T) {
 	// set up any necessary dependencies
 	os.WriteFile(".env", []byte("GO_ENV='development'\nAPP_HOST=''\nAPP_PORT='8082'\nAPP_LOG_LEVEL='DEBUG'\nX='1'"), 0755)
 
@@ -28,6 +28,7 @@ func TestIntegrationAPIHandler(t *testing.T) {
 	req := httptest.NewRequest("GET", "/hosts/inefficient", nil)
 	rr := httptest.NewRecorder()
 
+	t.Setenv("X", "1")
 	// Send the request to your test server
 	srv.Handler.ServeHTTP(rr, req)
 
